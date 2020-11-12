@@ -6,13 +6,15 @@
 //
 
 import SwiftUI
+import AWSFoundation
+import AWSCognito
+import AWSS3
 
 struct ContentView: View {
     @State var showActionSheet = false
     @State var showImagePicker = false
     
     @State var sourceType:UIImagePickerController.SourceType = .camera
-    
     @State var image:UIImage?
     
     func getDisplayImage(selectedImage:UIImage?) -> Image{
@@ -28,6 +30,7 @@ struct ContentView: View {
                 self.showActionSheet = true
             }){
                 Text("Show Image Picker")
+                    .padding(.top, 50.0)
             }.actionSheet(isPresented: $showActionSheet){
                 ActionSheet(title: Text("Add a picture"), message: nil, buttons: [
                                 //Buttons
@@ -43,6 +46,10 @@ struct ContentView: View {
                 ])
             }.sheet(isPresented: $showImagePicker){
                 imagePicker(image: self.$image, showImagePicker: self.$showImagePicker, sourceType: self.sourceType)
+            }
+            Button(action: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/{}/*@END_MENU_TOKEN@*/) {
+                Text("Upload")
+                    .padding(.top, 25.0)
             }
         }
     }
